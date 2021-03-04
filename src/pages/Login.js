@@ -3,9 +3,23 @@ import { Link } from "react-router-dom";
 import "../scss/login.scss";
 
 class Login2 extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "",
+      password: "",
+      code: "",
+    };
+  }
+
   changeCode(e) {
     e.target.src = "/api/code/?id=" + Date.now();
   }
+
+  handleChange = (e) => {
+    this.setState({[e.target.name]:e.target.value})
+  };
   render() {
     return (
       <div className="login-wrap">
@@ -18,18 +32,35 @@ class Login2 extends Component {
           <div className="login-box">
             <div className="input-group">
               <i class="fas fa-user"></i>
-              <input type="text" id="" placeholder="請輸入電話號碼" />
+              <input
+                type="text"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                id=""
+                placeholder="請輸入電話號碼"
+              />
             </div>
             <div className="input-group">
               <i class="fas fa-lock"></i>
-              <input type="password" id="" placeholder="請輸入密碼" />
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                id=""
+                placeholder="請輸入密碼"
+              />
             </div>
             <div className="code-group input-group">
               <input
                 type="text"
+                name="code"
                 id=""
                 className="code"
                 placeholder="請輸入驗證碼"
+                value={this.state.code}
+                onChange={this.handleChange}
               />
               <div className="code-img">
                 <img

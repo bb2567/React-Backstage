@@ -24,7 +24,10 @@
   }
 
   .login-bg {
-    padding: 110px 0 130px;
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 200px 0 130px;
+    margin: -60px 0 -50px 0 ;
 
     .login-box {
       box-sizing: border-box;
