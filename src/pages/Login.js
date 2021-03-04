@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { TextValidator } from '../components/';
+
 import "../scss/login.scss";
+
 
 class Login2 extends Component {
   constructor(props) {
@@ -32,14 +35,14 @@ class Login2 extends Component {
           <div className="login-box">
             <div className="input-group">
               <i class="fas fa-user"></i>
-              <input
+              {/* <input
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleChange}
-                id=""
                 placeholder="請輸入電話號碼"
-              />
+              /> */}
+              <TextValidator ></TextValidator>
             </div>
             <div className="input-group">
               <i class="fas fa-lock"></i>
@@ -48,7 +51,7 @@ class Login2 extends Component {
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChange}
-                id=""
+                
                 placeholder="請輸入密碼"
               />
             </div>
@@ -56,7 +59,7 @@ class Login2 extends Component {
               <input
                 type="text"
                 name="code"
-                id=""
+                
                 className="code"
                 placeholder="請輸入驗證碼"
                 value={this.state.code}
