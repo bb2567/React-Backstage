@@ -9,7 +9,9 @@ class TextValidator extends ValidatorComponent {
       return null;
     }
     // 錯誤訊息
-    return <span style={{ color: "red" }}>{this.getErrorMessage()}</span>;
+    return <span style={{ color: "orangered" , position:'absolute' , fontSize:'10px',left:'5px',top:'38px'}}>
+                  {this.getErrorMessage()}
+          </span>;
   }
 
   renderValidatorComponent() {
