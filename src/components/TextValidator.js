@@ -12,7 +12,7 @@ class TextValidator extends ValidatorComponent {
     return <span style={{ color: "red" }}>{this.getErrorMessage()}</span>;
   }
 
-  render() {
+  renderValidatorComponent() {
     const {
       errorMessages,
       validators,
