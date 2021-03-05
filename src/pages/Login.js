@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { TextValidator } from '../components/';
+import TextValidator from '../components/TextValidator';
 
 import "../scss/login.scss";
 
