@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import TextValidator from "../components/TextValidator";
 import { ValidatorForm } from "react-form-validator-core";
 import service from "../commons/Service";
+import {SaveLoginUserInfo} from '../commons/Auth'
 import "../scss/login.scss";
+import {message}from "antd";
 
 class Login2 extends Component {
   constructor(props) {
@@ -25,7 +27,16 @@ class Login2 extends Component {
   };
   handleSubmit = () => {
     service.userLogin(this.state).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
+      let{ history } = this.props
+      if(res.data.code === 1){
+        // 儲存登入資料到 sessionStorage
+        SaveLoginUserInfo(res.data.user);
+        // 跳轉頁面
+        history.push('/home')
+      }else{
+        message.error('登入失敗,請輸入正確的帳號及密碼');
+      }
     });
   };
   render() {

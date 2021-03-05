@@ -22,5 +22,6 @@ export function AuthLogin() {
  * @return undefined
  */
 export function SaveLoginUserInfo(user){
+  
  sessionStorage.setItem(Login_User,JSON.stringify(user))
 }
