@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextValidator from '../components/TextValidator';
-
+import { ValidatorForm } from 'react-form-validator-core';
 import "../scss/login.scss";
 
 
@@ -21,8 +21,9 @@ class Login2 extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({[e.target.name]:e.target.value})
+    this.setState({ [e.target.name]: e.target.value })
   };
+  handleSubmit = (e) => {}
   render() {
     return (
       <div className="login-wrap">
@@ -32,6 +33,10 @@ class Login2 extends Component {
           </Link>
         </nav>
         <div className="login-bg">
+          <ValidatorForm
+            ref="form"
+            onSubmit={this.handleSubmit}
+          >
           <div className="login-box">
             <div className="input-group">
               <i class="fas fa-user"></i>
@@ -42,7 +47,14 @@ class Login2 extends Component {
                 onChange={this.handleChange}
                 placeholder="請輸入電話號碼"
               /> */}
-              <TextValidator ></TextValidator>
+              <TextValidator
+                // onChange={this.handleChange}
+                name="file"
+                type="text"
+                value="333"
+                // validators={['isFile', 'maxFileSize:' + 1 * 1024 * 1024, 'allowedExtensions:image/png,image/jpeg']}
+                errorMessages={['File is not valid', 'Size must not exceed 1MB', 'Only png and jpeg']}
+              ></TextValidator>
             </div>
             <div className="input-group">
               <i class="fas fa-lock"></i>
@@ -51,7 +63,7 @@ class Login2 extends Component {
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChange}
-                
+
                 placeholder="請輸入密碼"
               />
             </div>
@@ -59,7 +71,7 @@ class Login2 extends Component {
               <input
                 type="text"
                 name="code"
-                
+
                 className="code"
                 placeholder="請輸入驗證碼"
                 value={this.state.code}
@@ -87,6 +99,7 @@ class Login2 extends Component {
               <a href="/">註冊</a>
             </div>
           </div>
+          </ValidatorForm>
         </div>
         <div className="login-ft">&copy;版權所有 SKIGO.com 2016-2022</div>
       </div>
