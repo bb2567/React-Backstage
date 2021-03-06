@@ -6,6 +6,7 @@ import service from "../commons/Service";
 import {SaveLoginUserInfo} from '../commons/Auth'
 import "../scss/login.scss";
 import {message}from "antd";
+import {urlParamsToObject} from '../commons/Helper'
 
 class Login2 extends Component {
   constructor(props) {
@@ -27,13 +28,22 @@ class Login2 extends Component {
   };
   handleSubmit = () => {
     service.userLogin(this.state).then((res) => {
-      // console.log(res.data);
-      let{ history } = this.props
+      let{ history, location  } = this.props
+
+      console.log(location.search)
       if(res.data.code === 1){
         // 儲存登入資料到 sessionStorage
         SaveLoginUserInfo(res.data.user);
-        // 跳轉頁面
-        history.push('/home')
+        // 跳轉到之前的請求頁面
+        let url = "/home";
+        // 判斷請求的 url 是否有 preurl
+         if(location.search){
+          let params = urlParamsToObject(location.search);
+          if(params.preurl){
+            url = params.preurl;
+          }
+         }
+        history.push(url)
       }else{
         message.error('登入失敗,請輸入正確的帳號及密碼');
       }

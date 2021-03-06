@@ -10,6 +10,7 @@ import { AuthLogin } from "./commons/Auth";
 import Login from "./pages/Login";
 import Empty from "./pages/Empty";
 import Home from "./pages/Home";
+import About from './pages/About'
 
 function App() {
   return (
@@ -23,14 +24,25 @@ function App() {
           }}
         />
         <Route
-          path="/home"
-          render={(props) => {
+          path="/home" render={(props) => {
             //判斷登入狀態
-
             if (!AuthLogin()) {
-              return <Redirect to={`/login?url=${props.match.path}`}></Redirect>;
+              return (
+                <Redirect to={`/login?preurl=${props.match.path}`}></Redirect>
+              );
             }
             return <Home {...props}></Home>;
+          }}
+        />
+        <Route path="/about"
+          render={(props) => {
+            //判斷登入狀態
+            if (!AuthLogin()) {
+              return (
+                <Redirect to={`/login?preurl=${props.match.path}`}></Redirect>
+              );
+            }
+            return <About {...props}></About>;
           }}
         />
         <Route path="/login" component={Login} />
