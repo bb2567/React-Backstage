@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import TextValidator from "../components/TextValidator";
+import TextValidator from "../commons/TextValidator";
 import { ValidatorForm } from "react-form-validator-core";
 import service from "../commons/Service";
 import {SaveLoginUserInfo} from '../commons/Auth'

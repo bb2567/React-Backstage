@@ -1,0 +1,28 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  .logo-wrap {
+    a {
+      color: white;
+      font-size: 28px;
+    }
+    span {
+      padding-left: 10px;
+    }
+  }
+  .user-wrap {
+    display: flex;
+    .btn-group {
+      margin: 0 10px;
+      cursor: pointer;
+      color: white;
+      transition: .3s;
+      &:hover {
+        color: yellow;
+      }
+      span {
+        padding-left: 10px;
+      }
+    }
+  }
+}
