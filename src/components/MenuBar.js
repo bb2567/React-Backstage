@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppstoreOutlined, BuildOutlined, SettingOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, BuildOutlined} from '@ant-design/icons';
 import { Menu } from "antd";
 import MenuItem from "antd/lib/menu/MenuItem";
 
@@ -10,8 +10,9 @@ class MenuBar extends Component {
     current: "",
   };
   handleMenuClick = (e) => {
-    console.log(e); //
+    // console.log(e.key); 
     this.setState({current:e.key})
+    this.props.history.push(`/home/${e.key}`);
   };
 
   render() {
