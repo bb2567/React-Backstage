@@ -21,7 +21,7 @@ export default class Home extends Component {
           <Sider style={{ backgroundColor: "#fff" }}>
             <MenuBar history={this.props.history} />
           </Sider>
-          <Content>
+          <Content style={{padding:'15px'}}>
             <Switch>
               <Route path={`${match.path}/user_mgr`} component={UserMgr}/>
               <Route path={`${match.path}/role_mgr`} component={RoleMgr}/>
