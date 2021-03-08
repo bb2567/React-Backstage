@@ -38,6 +38,11 @@ class UserMgr extends Component {
       }
     ],
   };
+  userRowSelection = {
+      onChange:(selectedRowKeys, selectedRows)=>{
+          console.log(selectedRowKeys, selectedRows)
+      }
+  }
   render() {
     return (
       <div className="admin-usermgr">
@@ -50,9 +55,13 @@ class UserMgr extends Component {
           </Breadcrumb.Item>
         </Breadcrumb>
         <hr />
-        <Table style={{backgroundColor:"#fefefe"}}
+        <Table 
+          style={{backgroundColor:"#fefefe"}}
+          bordered
           columns={this.state.columns}
           dataSource={this.state.userData}
+          rowSelection={this.userRowSelection}
+          rowKey="id"
         ></Table>
       </div>
     );
