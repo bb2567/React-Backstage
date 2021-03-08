@@ -6,10 +6,19 @@ import MenuBar from "../components/MenuBar";
 import UserMgr from './Admin/UserMgr';
 import PerMgr from './Admin/PerMgr';
 import RoleMgr from './Admin/RoleMgr';
+import axios from 'axios'
+import {getLoginToken} from '../commons/Auth'
 
 const { Header, Footer, Sider, Content } = Layout;
 
 export default class Home extends Component {
+  constructor(props){
+    super()
+    axios.defaults.headers['Authorization'] = getLoginToken()
+
+  }
+
+
   render() {
     const {match} = this.props
     return (

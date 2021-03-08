@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TextValidator from "../commons/TextValidator";
 import { ValidatorForm } from "react-form-validator-core";
 import service from "../commons/Service";
-import {SaveLoginUserInfo} from '../commons/Auth'
+import {SaveLoginUserInfo ,saveLoginToken } from '../commons/Auth'
 import "../scss/login.scss";
 import {message}from "antd";
 import {urlParamsToObject} from '../commons/Helper'
@@ -34,6 +34,9 @@ class Login2 extends Component {
       if(res.data.code === 1){
         // 儲存登入資料到 sessionStorage
         SaveLoginUserInfo(res.data.user);
+
+        // 儲存token
+        saveLoginToken(res.data.token)
         // 跳轉到之前的請求頁面
         let url = "/home";
         // 判斷請求的 url 是否有 preurl

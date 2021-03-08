@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Breadcrumb, Table } from "antd";
 import { Link } from "react-router-dom";
+import service from "../../commons/Service";
 
 class UserMgr extends Component {
   state = {
@@ -10,10 +11,7 @@ class UserMgr extends Component {
         name: "Aicoder",
         phone: "0800000123",
       },
-      { id: 2, 
-        name: "Aicoder2", 
-        phone: "0800333666" 
-    },
+      { id: 2, name: "Aicoder2", phone: "0800333666" },
       {
         id: 3,
         name: "Aicoder3",
@@ -35,14 +33,23 @@ class UserMgr extends Component {
         key: "phone",
         title: "電話",
         dataIndex: "phone",
-      }
+      },
     ],
   };
-  userRowSelection = {
-      onChange:(selectedRowKeys, selectedRows)=>{
-          console.log(selectedRowKeys, selectedRows)
-      }
+
+  componentDidMount() {
+    //  發送ajax請求，到後台獲取data
+    service.loadUserList()
+    .then((res) => {
+      this.setState({userData:res.data})
+    });
   }
+
+  userRowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(selectedRowKeys, selectedRows);
+    },
+  };
   render() {
     return (
       <div className="admin-usermgr">
@@ -55,8 +62,8 @@ class UserMgr extends Component {
           </Breadcrumb.Item>
         </Breadcrumb>
         <hr />
-        <Table 
-          style={{backgroundColor:"#fefefe"}}
+        <Table
+          style={{ backgroundColor: "#fefefe" }}
           bordered
           columns={this.state.columns}
           dataSource={this.state.userData}

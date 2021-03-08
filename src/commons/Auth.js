@@ -46,3 +46,16 @@ export function GetLoginUserInfo(user) {
 export function Logout() {
   sessionStorage.clear();
 } 
+
+/**
+ * 保存 token
+ */
+export function saveLoginToken(token){
+sessionStorage.setItem("Authorization",token)
+}
+/**
+ * 取得 token
+ */
+export function getLoginToken(token){
+ return sessionStorage.getItem("Authorization")
+  }
