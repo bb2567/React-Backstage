@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { Breadcrumb, Table } from "antd";
 import { Link } from "react-router-dom";
-import { ActionTypesAsync } from "../../Action/UserAction";
+import { LoadUserAsync } from "../../Action/UserAction";
 // import service from "../../commons/Service";
 import store from "../../store";
 
 class UserMgr extends Component {
   state = {
-    unsubscribe:null,
-    userData: store.getState().UserList,
+    unsubscribe: null,
+    userData: store.getState().UserList.list,
+    // _page 當前頁面 , _limit:幾筆資料
+    params: { _page: 1, _limit: 6 },
+    total:0,
     columns: [
       {
         key: "id",
@@ -28,7 +31,8 @@ class UserMgr extends Component {
     ],
   };
   userListChange = () => {
-    this.setState({ userData: store.getState().UserList });
+    const UserList = store.getState().UserList
+    this.setState({ userData:UserList.list, total: UserList.total} );
   };
 
   componentDidMount() {
@@ -37,18 +41,24 @@ class UserMgr extends Component {
     // .then((res) => {
     //   this.setState({userData:res.data})
     // });
-    store.dispatch(ActionTypesAsync({}));
+    store.dispatch(LoadUserAsync(this.state.params));
     const unsubscribe = store.subscribe(this.userListChange);
-    this.setState({unsubscribe:unsubscribe})
+    this.setState({ unsubscribe: unsubscribe });
   }
-  componentWillUnmount(){
-    this.state.unsubscribe && ( this.state.unsubscribe())
+  componentWillUnmount() {
+    this.state.unsubscribe && this.state.unsubscribe();
   }
 
   userRowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(selectedRowKeys, selectedRows);
     },
+  };
+
+  // 將插件的回調函數 儲存至 State 
+  changePage = (page, pageSize) => {
+    // console.log("page:", page, "pageSize:", pageSize); 
+    this.setState({params:{_page:page, _limit: pageSize}})
   };
   render() {
     return (
@@ -69,6 +79,13 @@ class UserMgr extends Component {
           dataSource={this.state.userData}
           rowSelection={this.userRowSelection}
           rowKey="id"
+          pagination={{
+            total:this.state.total,
+            pageSize: 6,
+            defaultCurrent: 1,
+            onChange: this.changePage,
+          }}
+          // pagination={false}
         ></Table>
       </div>
     );

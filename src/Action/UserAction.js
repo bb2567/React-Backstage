@@ -8,10 +8,11 @@ export function LoadUserAction(payload) {
   };
 }
 // redux-thunk
-export function ActionTypesAsync(params) {
+export function LoadUserAsync(params) {
   return (dispatch) => {
-    return service.loadUserList().then((res) => {
-      dispatch(LoadUserAction(res.data));
+    return service.loadUserList(params).then((res) => {
+      let total = parseInt(res.headers['x-total-count']); 
+      dispatch(LoadUserAction({list:res.data, total:total}));
     });
   };
 };
