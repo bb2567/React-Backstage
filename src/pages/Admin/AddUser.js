@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Modal } from "antd";
+import { Modal ,Form} from "antd";
+import AddUserFrom from "./AddUserFrom"
+
 
 class AddUser extends Component {
   render() {
@@ -11,7 +13,7 @@ class AddUser extends Component {
         visible={this.props.visible}
         onCancel={() => this.props.close()}
       >
-        add user
+        <AddUserFrom/>
       </Modal>
     );
   }

@@ -68,7 +68,7 @@ class UserMgr extends Component {
     {store.dispatch(LoadUserAsync(this.state.params))})
   };
 
-  closeFrom =()=>{
+  closeForm =()=>{
     this.setState({AddUserForm:false})
   }
   ButtonStyle ={margin:'5px'}
@@ -81,7 +81,7 @@ class UserMgr extends Component {
             <Link to="/home">首頁</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/home/user_mgr">UserMgr</Link>
+            <Link to="/home/user_mgr">用戶管理</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <hr />
@@ -103,7 +103,7 @@ class UserMgr extends Component {
           }}
           // pagination={false}
         ></Table>
-        <AddUser close={this.closeFrom} visible ={this.state.AddUserForm}/>
+        <AddUser close={this.closeForm} visible ={this.state.AddUserForm}/>
       </div>
     );
   }
