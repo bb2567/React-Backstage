@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Breadcrumb, Table } from "antd";
 import { Link } from "react-router-dom";
-import { LoadUserAsync } from "../../Action/UserAction";
+import { LoadUserAction, LoadUserAsync } from "../../Action/UserAction";
 // import service from "../../commons/Service";
 import store from "../../store";
 
@@ -30,11 +30,13 @@ class UserMgr extends Component {
       },
     ],
   };
+  
+
   userListChange = () => {
     const UserList = store.getState().UserList
     this.setState({ userData:UserList.list, total: UserList.total} );
   };
-
+ 
   componentDidMount() {
     //  發送ajax請求，到後台獲取data
     // service.loadUserList()
@@ -58,7 +60,10 @@ class UserMgr extends Component {
   // 將插件的回調函數 儲存至 State 
   changePage = (page, pageSize) => {
     // console.log("page:", page, "pageSize:", pageSize); 
-    this.setState({params:{_page:page, _limit: pageSize}})
+    this.setState(preState=> {
+      return {...preState,...{params:{_page:page, _limit: pageSize}}}
+    }, ()=>
+    {store.dispatch(LoadUserAsync(this.state.params))})
   };
   render() {
     return (
