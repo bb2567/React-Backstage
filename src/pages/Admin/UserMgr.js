@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Breadcrumb, Table } from "antd";
+import { Breadcrumb, Table,Button } from "antd";
 import { Link } from "react-router-dom";
-import { LoadUserAction, LoadUserAsync } from "../../Action/UserAction";
+import { LoadUserAsync } from "../../Action/UserAction";
+import AddUser from "./AddUser";
 // import service from "../../commons/Service";
 import store from "../../store";
 
@@ -29,8 +30,9 @@ class UserMgr extends Component {
         dataIndex: "phone",
       },
     ],
+    // 表單顯示
+    AddUserForm: false
   };
-  
 
   userListChange = () => {
     const UserList = store.getState().UserList
@@ -65,6 +67,12 @@ class UserMgr extends Component {
     }, ()=>
     {store.dispatch(LoadUserAsync(this.state.params))})
   };
+
+  closeFrom =()=>{
+    this.setState({AddUserForm:false})
+  }
+  ButtonStyle ={margin:'5px'}
+
   render() {
     return (
       <div className="admin-usermgr">
@@ -77,6 +85,9 @@ class UserMgr extends Component {
           </Breadcrumb.Item>
         </Breadcrumb>
         <hr />
+        <Button onClick={()=>this.setState({AddUserForm:true})} style={this.ButtonStyle} type="primary">新增</Button>
+        <Button style={this.ButtonStyle} type="ghost">編輯</Button>
+        <Button style={this.ButtonStyle} type="danger">刪除</Button>
         <Table
           style={{ backgroundColor: "#fefefe" }}
           bordered
@@ -92,6 +103,7 @@ class UserMgr extends Component {
           }}
           // pagination={false}
         ></Table>
+        <AddUser close={this.closeFrom} visible ={this.state.AddUserForm}/>
       </div>
     );
   }
