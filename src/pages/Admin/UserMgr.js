@@ -30,8 +30,7 @@ class UserMgr extends Component {
         dataIndex: "phone",
       },
     ],
-    // 表單顯示
-    AddUserForm: false
+    showAddUserForm: false
   };
 
   userListChange = () => {
@@ -69,7 +68,7 @@ class UserMgr extends Component {
   };
 
   closeForm =()=>{
-    this.setState({AddUserForm:false})
+    this.setState({showAddUserForm:false})
   }
   ButtonStyle ={margin:'5px'}
 
@@ -85,7 +84,7 @@ class UserMgr extends Component {
           </Breadcrumb.Item>
         </Breadcrumb>
         <hr />
-        <Button onClick={()=>this.setState({AddUserForm:true})} style={this.ButtonStyle} type="primary">新增</Button>
+        <Button onClick={()=>this.setState({showAddUserForm:true})} style={this.ButtonStyle} type="primary">新增</Button>
         <Button style={this.ButtonStyle} type="ghost">編輯</Button>
         <Button style={this.ButtonStyle} type="danger">刪除</Button>
         <Table
@@ -103,7 +102,9 @@ class UserMgr extends Component {
           }}
           // pagination={false}
         ></Table>
-        <AddUser close={this.closeForm} visible ={this.state.AddUserForm}/>
+        <AddUser visible ={this.state.showAddUserForm} close={this.closeForm}
+
+        />
       </div>
     );
   }
